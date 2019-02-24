@@ -13,6 +13,7 @@ using Microsoft.Health.Extensions.DependencyInjection;
 using Microsoft.Health.Fhir.Api.Configs;
 using Microsoft.Health.Fhir.Api.Features.Audit;
 using Microsoft.Health.Fhir.Api.Features.Context;
+using Microsoft.Health.Fhir.Api.Features.EventEmission;
 using Microsoft.Health.Fhir.Api.Features.Exceptions;
 using Microsoft.Health.Fhir.Api.Features.Headers;
 using Microsoft.Health.Fhir.Core.Registration;
@@ -112,6 +113,9 @@ namespace Microsoft.Extensions.DependencyInjection
                     app.UseAudit();
 
                     app.UseAuthentication();
+
+                    // Adding experimental event emission middleware.
+                    app.UseEventEmission();
 
                     next(app);
                 };
