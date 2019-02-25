@@ -3,19 +3,14 @@
 // Licensed under the MIT License (MIT). See LICENSE in the repo root for license information.
 // -------------------------------------------------------------------------------------------------
 
-using System;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-
 namespace Microsoft.Health.Fhir.Api.Features.EventEmission
 {
-    public static class EventEmissionMiddlewareExtension
+    public class EventEmissionConfiguration
     {
-        public static IApplicationBuilder UseEventEmission(
-            this IApplicationBuilder builder)
-        {
-            return builder.UseMiddleware<EventEmissionMiddleware>();
-        }
+        public bool Enabled { get; set; }
+
+        public string ConnectionString { get; set; }
+
+        public string EventHubName { get; set; }
     }
 }

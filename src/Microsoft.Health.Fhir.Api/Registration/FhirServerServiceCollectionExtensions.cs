@@ -45,14 +45,17 @@ namespace Microsoft.Extensions.DependencyInjection
             });
 
             var fhirServerConfiguration = new FhirServerConfiguration();
+            var eventEmissionConfiguration = new EventEmissionConfiguration();
 
             configurationRoot?.GetSection(FhirServerConfigurationSectionName).Bind(fhirServerConfiguration);
+            configurationRoot?.GetSection(FhirServerConfigurationSectionName).GetSection("EventHub").Bind(eventEmissionConfiguration);
             configureAction?.Invoke(fhirServerConfiguration);
 
             services.AddSingleton(Options.Options.Create(fhirServerConfiguration));
             services.AddSingleton(Options.Options.Create(fhirServerConfiguration.Security));
             services.AddSingleton(Options.Options.Create(fhirServerConfiguration.Conformance));
             services.AddSingleton(Options.Options.Create(fhirServerConfiguration.Features));
+            services.AddSingleton(Options.Options.Create(eventEmissionConfiguration));
             services.AddTransient<IStartupFilter, FhirServerStartupFilter>();
 
             services.RegisterAssemblyModules(Assembly.GetExecutingAssembly(), fhirServerConfiguration);
