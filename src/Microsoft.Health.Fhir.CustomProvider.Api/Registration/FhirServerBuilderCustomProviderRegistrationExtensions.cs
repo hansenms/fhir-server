@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Health.Extensions.DependencyInjection;
 using Microsoft.Health.Fhir.Core.Registration;
 using Microsoft.Health.Fhir.CustomProvider.Features.Health;
+using Microsoft.Health.Fhir.CustomProvider.Features.Search;
 using Microsoft.Health.Fhir.CustomProvider.Features.Storage;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -28,6 +29,11 @@ namespace Microsoft.Extensions.DependencyInjection
             services
                 .AddHealthChecks()
                 .AddCheck<CustomProviderHealthCheck>(nameof(CustomProviderHealthCheck));
+
+            services.Add<CustomProviderSearchService>()
+                .Scoped()
+                .AsSelf()
+                .AsImplementedInterfaces();
 
             return fhirServerBuilder;
         }
