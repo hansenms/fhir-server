@@ -10,5 +10,7 @@ namespace Microsoft.Health.Fhir.Web
         public const string CosmosDb = "CosmosDb";
 
         public const string SqlServer = "SqlServer";
+
+        public const string CustomProvider = "CustomProvider";
     }
 }

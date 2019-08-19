@@ -1,4 +1,4 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -118,6 +118,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Health.Fhir.Stu3.Tests.Integration", "test\Microsoft.Health.Fhir.Stu3.Tests.Integration\Microsoft.Health.Fhir.Stu3.Tests.Integration.csproj", "{514B56AD-4E95-46AF-9976-2C68791E157E}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Microsoft.Health.Fhir.Shared.Tests.Integration", "test\Microsoft.Health.Fhir.Shared.Tests.Integration\Microsoft.Health.Fhir.Shared.Tests.Integration.shproj", "{8AE4A7FD-C963-4004-8086-83E4615AC357}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Health.Fhir.CustomProvider", "src\Microsoft.Health.Fhir.CustomProvider\Microsoft.Health.Fhir.CustomProvider.csproj", "{C9321997-5B88-480F-8921-CD9058D78853}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Health.Fhir.CustomProvider.Api", "src\Microsoft.Health.Fhir.CustomProvider.Api\Microsoft.Health.Fhir.CustomProvider.Api.csproj", "{9EA510D0-5245-45D4-B85E-CD21FE15B8DA}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -281,6 +285,14 @@ Global
 		{514B56AD-4E95-46AF-9976-2C68791E157E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{514B56AD-4E95-46AF-9976-2C68791E157E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{514B56AD-4E95-46AF-9976-2C68791E157E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9321997-5B88-480F-8921-CD9058D78853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9321997-5B88-480F-8921-CD9058D78853}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9321997-5B88-480F-8921-CD9058D78853}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9321997-5B88-480F-8921-CD9058D78853}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EA510D0-5245-45D4-B85E-CD21FE15B8DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EA510D0-5245-45D4-B85E-CD21FE15B8DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EA510D0-5245-45D4-B85E-CD21FE15B8DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EA510D0-5245-45D4-B85E-CD21FE15B8DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -335,6 +347,8 @@ Global
 		{61443024-E60B-4E61-9851-B8D57A8886DC} = {BA0D5243-CFC7-4DEB-9836-657C50195DD1}
 		{514B56AD-4E95-46AF-9976-2C68791E157E} = {BA0D5243-CFC7-4DEB-9836-657C50195DD1}
 		{8AE4A7FD-C963-4004-8086-83E4615AC357} = {BA0D5243-CFC7-4DEB-9836-657C50195DD1}
+		{C9321997-5B88-480F-8921-CD9058D78853} = {8AD2A324-DAB5-4380-94A5-31F7D817C384}
+		{9EA510D0-5245-45D4-B85E-CD21FE15B8DA} = {8AD2A324-DAB5-4380-94A5-31F7D817C384}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		RESX_SortFileContentOnSave = True
