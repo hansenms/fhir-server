@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Health.Fhir.Core.Features.Conformance;
 using Microsoft.Health.Fhir.Core.Features.Persistence;
 using Microsoft.Health.Fhir.Core.Models;
+using Microsoft.Health.Fhir.CustomProvider.Configs;
 using Microsoft.Health.Fhir.ValueSets;
 
 namespace Microsoft.Health.Fhir.CustomProvider.Features.Storage
@@ -18,10 +19,12 @@ namespace Microsoft.Health.Fhir.CustomProvider.Features.Storage
     public class CustomProviderFhirDataStore : IFhirDataStore, IProvideCapability
     {
         private readonly ILogger<CustomProviderFhirDataStore> _logger;
+        private readonly CustomProviderDataStoreConfiguration _config;
 
-        public CustomProviderFhirDataStore(ILogger<CustomProviderFhirDataStore> logger)
+        public CustomProviderFhirDataStore(ILogger<CustomProviderFhirDataStore> logger, CustomProviderDataStoreConfiguration config)
         {
             _logger = logger;
+            _config = config;
         }
 
         public Task<UpsertOutcome> UpsertAsync(ResourceWrapper resource, WeakETag weakETag, bool allowCreate, bool keepHistory, CancellationToken cancellationToken)
