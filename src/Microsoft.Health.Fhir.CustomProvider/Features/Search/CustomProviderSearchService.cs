@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using EnsureThat;
@@ -13,6 +14,8 @@ using Microsoft.Health.Fhir.Core.Features.Persistence;
 using Microsoft.Health.Fhir.Core.Features.Search;
 using Microsoft.Health.Fhir.Core.Models;
 using Microsoft.Health.Fhir.CustomProvider.Configs;
+using Microsoft.Health.Fhir.CustomProvider.Features.Search.Expressions.Visitors.QueryGenerators;
+using Microsoft.Health.Fhir.CustomProvider.Features.Storage;
 
 namespace Microsoft.Health.Fhir.CustomProvider.Features.Search
 {
@@ -22,26 +25,36 @@ namespace Microsoft.Health.Fhir.CustomProvider.Features.Search
 
         private readonly CustomProviderDataStoreConfiguration _config;
 
+        private readonly CustomProviderTokenProvider _tokenProvider;
+
         public CustomProviderSearchService(
             ISearchOptionsFactory searchOptionsFactory,
             IFhirDataStore fhirDataStore,
             IModelInfoProvider modelInfoProvider,
             CustomProviderDataStoreConfiguration config,
+            CustomProviderTokenProvider tokenProvider,
             ILogger<CustomProviderSearchService> logger)
             : base(searchOptionsFactory, fhirDataStore, modelInfoProvider)
         {
             EnsureArg.IsNotNull(logger, nameof(logger));
+            EnsureArg.IsNotNull(fhirDataStore, nameof(fhirDataStore));
 
+            _tokenProvider = tokenProvider;
             _config = config;
             _logger = logger;
         }
 
-        protected override Task<SearchResult> SearchInternalAsync(SearchOptions searchOptions, CancellationToken cancellationToken)
+        protected override async Task<SearchResult> SearchInternalAsync(SearchOptions searchOptions, CancellationToken cancellationToken)
         {
             var results = new List<ResourceWrapper>();
-            _logger.LogInformation(searchOptions.Expression.ToString());
-            _logger.LogInformation($"ClientId: {_config.ClientId}");
-            return Task.FromResult(new SearchResult(results, searchOptions.UnsupportedSearchParams, searchOptions.ContinuationToken));
+
+            var sb = new StringBuilder();
+            var queryGenerator = new ODataQueryGenerator(sb);
+            searchOptions.Expression.AcceptVisitor(queryGenerator, searchOptions);
+
+            _logger.LogInformation($"searchParameter: {sb.ToString()}");
+            _logger.LogInformation($"Token: {await _tokenProvider.GetAccessToken()}");
+            return new SearchResult(results, searchOptions.UnsupportedSearchParams, searchOptions.ContinuationToken);
         }
 
         protected override Task<SearchResult> SearchHistoryInternalAsync(SearchOptions searchOptions, CancellationToken cancellationToken)

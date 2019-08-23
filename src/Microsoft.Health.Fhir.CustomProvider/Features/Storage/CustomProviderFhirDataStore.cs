@@ -21,10 +21,16 @@ namespace Microsoft.Health.Fhir.CustomProvider.Features.Storage
         private readonly ILogger<CustomProviderFhirDataStore> _logger;
         private readonly CustomProviderDataStoreConfiguration _config;
 
-        public CustomProviderFhirDataStore(ILogger<CustomProviderFhirDataStore> logger, CustomProviderDataStoreConfiguration config)
+        private readonly CustomProviderTokenProvider _tokenProvider;
+
+        public CustomProviderFhirDataStore(
+            ILogger<CustomProviderFhirDataStore> logger,
+            CustomProviderDataStoreConfiguration config,
+            CustomProviderTokenProvider tokenProvider)
         {
             _logger = logger;
             _config = config;
+            _tokenProvider = tokenProvider;
         }
 
         public Task<UpsertOutcome> UpsertAsync(ResourceWrapper resource, WeakETag weakETag, bool allowCreate, bool keepHistory, CancellationToken cancellationToken)
