@@ -21,6 +21,10 @@ namespace Microsoft.Health.Fhir.CustomProvider.Features.Search.Expressions.Visit
 
         public StringBuilder StringBuilder { get; }
 
+        public string FhirResourceName { get; private set; }
+
+        public string ODataEntityName { get; private set; }
+
         public object VisitBinary(BinaryExpression expression, SearchOptions context)
         {
             throw new NotImplementedException();
@@ -70,10 +74,11 @@ namespace Microsoft.Health.Fhir.CustomProvider.Features.Search.Expressions.Visit
                     throw new Exception("String builder should be empty when encountering _type");
                 }
 
-                var resourceName = expression.Expression.AcceptVisitor(this, context);
-                switch (resourceName)
+                FhirResourceName = expression.Expression.AcceptVisitor(this, context).ToString();
+                switch (FhirResourceName)
                 {
                     case "Patient":
+                        ODataEntityName = "contacts";
                         StringBuilder.Append("contacts?$filter=(msemr_contacttype eq 935000000)");
                         break;
                     default:
@@ -85,10 +90,10 @@ namespace Microsoft.Health.Fhir.CustomProvider.Features.Search.Expressions.Visit
                 switch (expression.Parameter.Name)
                 {
                     case "family":
-                        StringBuilder.Append($" and contains(lastname, '{expression.Expression.AcceptVisitor(this, context)}')");
+                        StringBuilder.Append($" and startswith(lastname, '{expression.Expression.AcceptVisitor(this, context)}')");
                         break;
                     case "given":
-                        StringBuilder.Append($" and contains(firstname, '{expression.Expression.AcceptVisitor(this, context)}')");
+                        StringBuilder.Append($" and startswith(firstname, '{expression.Expression.AcceptVisitor(this, context)}')");
                         break;
                     default:
                         throw new NotImplementedException();

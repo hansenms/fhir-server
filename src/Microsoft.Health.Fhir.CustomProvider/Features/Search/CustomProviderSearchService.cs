@@ -69,7 +69,7 @@ namespace Microsoft.Health.Fhir.CustomProvider.Features.Search
             var packages = await _client.FindEntriesAsync(sb.ToString());
             foreach (var package in packages)
             {
-                _logger.LogInformation(package["lastname"].ToString());
+                _logger.LogInformation(ODataRawResourceFactory.CreateRawResource(queryGenerator.FhirResourceName, package));
             }
 
             _logger.LogInformation($"searchParameter: {sb.ToString()}");
