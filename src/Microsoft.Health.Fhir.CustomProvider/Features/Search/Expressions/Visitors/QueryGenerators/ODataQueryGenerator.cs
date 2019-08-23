@@ -74,7 +74,7 @@ namespace Microsoft.Health.Fhir.CustomProvider.Features.Search.Expressions.Visit
                 switch (resourceName)
                 {
                     case "Patient":
-                        StringBuilder.Append("/contacts?$filter=(msemr_contacttype eq 935000000)");
+                        StringBuilder.Append("contacts?$filter=(msemr_contacttype eq 935000000)");
                         break;
                     default:
                         throw new NotImplementedException();
