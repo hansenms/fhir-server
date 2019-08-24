@@ -69,11 +69,23 @@ namespace Microsoft.Health.Fhir.CustomProvider.Features.Search
             var packages = await _client.FindEntriesAsync(sb.ToString());
             foreach (var package in packages)
             {
-                _logger.LogInformation(ODataRawResourceFactory.CreateRawResource(queryGenerator.FhirResourceName, package));
+                var resource = ODataRawResourceFactory.CreateRawResource(queryGenerator.FhirResourceName, package);
+                var versionString = package["versionnumber"].ToString();
+                var modifiedOnString = package["modifiedon"].ToString();
+
+                results.Add(new ResourceWrapper(
+                    resource["id"].ToString(),
+                    versionString,
+                    resource["resourceType"].ToString(),
+                    new RawResource(resource.ToString(), FhirResourceFormat.Json),
+                    new ResourceRequest("GET"),
+                    new DateTimeOffset(DateTime.Parse(modifiedOnString)),
+                    false, // isDeleted
+                    null,
+                    null,
+                    null));
             }
 
-            _logger.LogInformation($"searchParameter: {sb.ToString()}");
-            _logger.LogInformation($"Token: {await _tokenProvider.GetAccessToken()}");
             return new SearchResult(results, searchOptions.UnsupportedSearchParams, searchOptions.ContinuationToken);
         }
 

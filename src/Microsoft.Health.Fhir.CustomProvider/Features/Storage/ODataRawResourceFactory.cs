@@ -12,7 +12,7 @@ namespace Microsoft.Health.Fhir.CustomProvider.Features.Storage
 {
     public static class ODataRawResourceFactory
     {
-        public static string CreateRawResource(string resourceType, IDictionary<string, object> odata)
+        public static dynamic CreateRawResource(string resourceType, IDictionary<string, object> odata)
         {
             EnsureArg.IsNotNullOrEmpty(resourceType, nameof(resourceType));
             EnsureArg.IsNotNull(odata, nameof(odata));
@@ -22,11 +22,13 @@ namespace Microsoft.Health.Fhir.CustomProvider.Features.Storage
                 case "Patient":
                     dynamic resource = new JObject();
                     resource.resourceType = "Patient";
+                    resource.id = odata["contactid"].ToString();
                     var name = new JObject();
                     name["family"] = odata["lastname"].ToString();
-                    name["given"] = new JArray(odata["firstname"]);
+                    name["given"] = new JArray(odata["firstname"].ToString());
                     resource.name = new JArray(name);
-                    return resource.ToString();
+                    resource["birthDate"] = odata["birthdate"].ToString();
+                    return resource;
                 default:
                     throw new NotImplementedException();
             }
