@@ -80,10 +80,10 @@ namespace Microsoft.Health.Fhir.CustomProvider.Features.Search
                 var modifiedOnString = package["modifiedon"].ToString();
 
                 results.Add(new ResourceWrapper(
-                    resource["id"].ToString(),
+                    _cdsResourceFactory.GetResourceId(queryGenerator.FhirResourceName, package),
                     versionString,
-                    resource["resourceType"].ToString(),
-                    new RawResource(resource.ToString(), FhirResourceFormat.Json),
+                    queryGenerator.FhirResourceName,
+                    resource,
                     new ResourceRequest("GET"),
                     new DateTimeOffset(DateTime.Parse(modifiedOnString)),
                     false, // isDeleted
