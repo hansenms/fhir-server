@@ -6,13 +6,22 @@
 using System;
 using System.Collections.Generic;
 using EnsureThat;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
-namespace Microsoft.Health.Fhir.CustomProvider.Features.Storage
+namespace Microsoft.Health.Fhir.Cds.Features
 {
-    public static class ODataRawResourceFactory
+    public class CdsResourceFactory : ICdsResourceFactory
     {
-        public static dynamic CreateRawResource(string resourceType, IDictionary<string, object> odata)
+        private readonly ILogger<CdsResourceFactory> _logger;
+
+        public CdsResourceFactory(ILogger<CdsResourceFactory> logger)
+        {
+            EnsureArg.IsNotNull(logger);
+            _logger = logger;
+        }
+
+        public dynamic CreateRawResource(string resourceType, IDictionary<string, object> odata)
         {
             EnsureArg.IsNotNullOrEmpty(resourceType, nameof(resourceType));
             EnsureArg.IsNotNull(odata, nameof(odata));
@@ -30,6 +39,7 @@ namespace Microsoft.Health.Fhir.CustomProvider.Features.Storage
                     resource["birthDate"] = odata["birthdate"].ToString();
                     return resource;
                 default:
+                    _logger.LogCritical("Attempting to creating an unknown resource type");
                     throw new NotImplementedException();
             }
         }

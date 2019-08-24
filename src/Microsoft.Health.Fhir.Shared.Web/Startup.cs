@@ -42,6 +42,7 @@ namespace Microsoft.Health.Fhir.Web
             }
             else if (dataStore.Equals(KnownDataStores.CustomProvider, StringComparison.InvariantCultureIgnoreCase))
             {
+                fhirServerBuilder.AddExperimentalCds(); // Adds FHIR version specific CDS resource factory
                 fhirServerBuilder.AddExperimentalCustomProvider();
             }
 

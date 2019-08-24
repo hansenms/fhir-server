@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using EnsureThat;
 using Microsoft.Extensions.Logging;
+using Microsoft.Health.Fhir.Cds.Features;
 using Microsoft.Health.Fhir.Core.Features.Persistence;
 using Microsoft.Health.Fhir.Core.Features.Search;
 using Microsoft.Health.Fhir.Core.Models;
@@ -30,18 +31,23 @@ namespace Microsoft.Health.Fhir.CustomProvider.Features.Search
 
         private readonly ODataClient _client;
 
+        private readonly ICdsResourceFactory _cdsResourceFactory;
+
         public CustomProviderSearchService(
             ISearchOptionsFactory searchOptionsFactory,
             IFhirDataStore fhirDataStore,
             IModelInfoProvider modelInfoProvider,
+            ICdsResourceFactory cdsResourceFactory,
             CustomProviderDataStoreConfiguration config,
             CustomProviderTokenProvider tokenProvider,
             ILogger<CustomProviderSearchService> logger)
             : base(searchOptionsFactory, fhirDataStore, modelInfoProvider)
         {
+            EnsureArg.IsNotNull(cdsResourceFactory, nameof(cdsResourceFactory));
             EnsureArg.IsNotNull(logger, nameof(logger));
             EnsureArg.IsNotNull(fhirDataStore, nameof(fhirDataStore));
 
+            _cdsResourceFactory = cdsResourceFactory;
             _tokenProvider = tokenProvider;
             _config = config;
             _logger = logger;
@@ -69,7 +75,7 @@ namespace Microsoft.Health.Fhir.CustomProvider.Features.Search
             var packages = await _client.FindEntriesAsync(sb.ToString());
             foreach (var package in packages)
             {
-                var resource = ODataRawResourceFactory.CreateRawResource(queryGenerator.FhirResourceName, package);
+                var resource = _cdsResourceFactory.CreateRawResource(queryGenerator.FhirResourceName, package);
                 var versionString = package["versionnumber"].ToString();
                 var modifiedOnString = package["modifiedon"].ToString();
 

@@ -123,6 +123,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Health.Fhir.Custo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Health.Fhir.CustomProvider.Api", "src\Microsoft.Health.Fhir.CustomProvider.Api\Microsoft.Health.Fhir.CustomProvider.Api.csproj", "{9EA510D0-5245-45D4-B85E-CD21FE15B8DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Health.Fhir.Cds", "src\Microsoft.Health.Fhir.Cds\Microsoft.Health.Fhir.Cds.csproj", "{5B17C97A-A769-4F0E-8AD6-0CD069026550}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Health.Fhir.R4.Cds", "src\Microsoft.Health.Fhir.R4.Cds\Microsoft.Health.Fhir.R4.Cds.csproj", "{676AF873-05EE-476B-9402-C82206A7D919}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Health.Fhir.Stu3.Cds", "src\Microsoft.Health.Fhir.Stu3.Cds\Microsoft.Health.Fhir.Stu3.Cds.csproj", "{4E817284-23C8-4D7D-8959-1B398F8168B7}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		test\Microsoft.Health.Fhir.Shared.Tests.E2E.Common\Microsoft.Health.Fhir.Shared.Tests.E2E.Common.projitems*{0478b687-7105-40f6-a2dc-81057890e944}*SharedItemsImports = 13
@@ -293,6 +299,18 @@ Global
 		{9EA510D0-5245-45D4-B85E-CD21FE15B8DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EA510D0-5245-45D4-B85E-CD21FE15B8DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EA510D0-5245-45D4-B85E-CD21FE15B8DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B17C97A-A769-4F0E-8AD6-0CD069026550}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B17C97A-A769-4F0E-8AD6-0CD069026550}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B17C97A-A769-4F0E-8AD6-0CD069026550}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B17C97A-A769-4F0E-8AD6-0CD069026550}.Release|Any CPU.Build.0 = Release|Any CPU
+		{676AF873-05EE-476B-9402-C82206A7D919}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{676AF873-05EE-476B-9402-C82206A7D919}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{676AF873-05EE-476B-9402-C82206A7D919}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{676AF873-05EE-476B-9402-C82206A7D919}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E817284-23C8-4D7D-8959-1B398F8168B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E817284-23C8-4D7D-8959-1B398F8168B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E817284-23C8-4D7D-8959-1B398F8168B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E817284-23C8-4D7D-8959-1B398F8168B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -349,6 +367,9 @@ Global
 		{8AE4A7FD-C963-4004-8086-83E4615AC357} = {BA0D5243-CFC7-4DEB-9836-657C50195DD1}
 		{C9321997-5B88-480F-8921-CD9058D78853} = {8AD2A324-DAB5-4380-94A5-31F7D817C384}
 		{9EA510D0-5245-45D4-B85E-CD21FE15B8DA} = {8AD2A324-DAB5-4380-94A5-31F7D817C384}
+		{5B17C97A-A769-4F0E-8AD6-0CD069026550} = {8AD2A324-DAB5-4380-94A5-31F7D817C384}
+		{676AF873-05EE-476B-9402-C82206A7D919} = {8AD2A324-DAB5-4380-94A5-31F7D817C384}
+		{4E817284-23C8-4D7D-8959-1B398F8168B7} = {8AD2A324-DAB5-4380-94A5-31F7D817C384}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		RESX_SortFileContentOnSave = True
