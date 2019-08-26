@@ -40,10 +40,10 @@ namespace Microsoft.Health.Fhir.Web
             {
                 fhirServerBuilder.AddExperimentalSqlServer();
             }
-            else if (dataStore.Equals(KnownDataStores.CustomProvider, StringComparison.InvariantCultureIgnoreCase))
+            else if (dataStore.Equals(KnownDataStores.Cds, StringComparison.InvariantCultureIgnoreCase))
             {
-                fhirServerBuilder.AddExperimentalCds(); // Adds FHIR version specific CDS resource factory
-                fhirServerBuilder.AddExperimentalCustomProvider();
+                fhirServerBuilder.AddExperimentalCdsFactory(); // Adds FHIR version specific CDS resource factory
+                fhirServerBuilder.AddExperimentalCdsProvider();
             }
 
             AddApplicationInsightsTelemetry(services);

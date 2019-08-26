@@ -9,7 +9,7 @@ using EnsureThat;
 using Microsoft.Health.Fhir.Core.Features.Search;
 using Microsoft.Health.Fhir.Core.Features.Search.Expressions;
 
-namespace Microsoft.Health.Fhir.CustomProvider.Features.Search.Expressions.Visitors.QueryGenerators
+namespace Microsoft.Health.Fhir.Cds.Features.Search.Expressions.Visitors.QueryGenerators
 {
     internal class ODataQueryGenerator : IExpressionVisitor<SearchOptions, object>
     {

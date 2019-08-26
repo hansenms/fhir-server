@@ -8,25 +8,25 @@ using System.Threading;
 using System.Threading.Tasks;
 using EnsureThat;
 using Microsoft.Extensions.Logging;
+using Microsoft.Health.Fhir.Cds.Configs;
 using Microsoft.Health.Fhir.Core.Features.Conformance;
 using Microsoft.Health.Fhir.Core.Features.Persistence;
 using Microsoft.Health.Fhir.Core.Models;
-using Microsoft.Health.Fhir.CustomProvider.Configs;
 using Microsoft.Health.Fhir.ValueSets;
 
-namespace Microsoft.Health.Fhir.CustomProvider.Features.Storage
+namespace Microsoft.Health.Fhir.Cds.Features.Storage
 {
-    public class CustomProviderFhirDataStore : IFhirDataStore, IProvideCapability
+    public class CdsFhirDataStore : IFhirDataStore, IProvideCapability
     {
-        private readonly ILogger<CustomProviderFhirDataStore> _logger;
-        private readonly CustomProviderDataStoreConfiguration _config;
+        private readonly ILogger<CdsFhirDataStore> _logger;
+        private readonly CdsDataStoreConfiguration _config;
 
-        private readonly CustomProviderTokenProvider _tokenProvider;
+        private readonly CdsTokenProvider _tokenProvider;
 
-        public CustomProviderFhirDataStore(
-            ILogger<CustomProviderFhirDataStore> logger,
-            CustomProviderDataStoreConfiguration config,
-            CustomProviderTokenProvider tokenProvider)
+        public CdsFhirDataStore(
+            ILogger<CdsFhirDataStore> logger,
+            CdsDataStoreConfiguration config,
+            CdsTokenProvider tokenProvider)
         {
             _logger = logger;
             _config = config;

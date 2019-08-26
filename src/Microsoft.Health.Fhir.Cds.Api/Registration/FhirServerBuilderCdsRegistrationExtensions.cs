@@ -7,25 +7,25 @@ using System;
 using EnsureThat;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Health.Extensions.DependencyInjection;
+using Microsoft.Health.Fhir.Cds.Configs;
+using Microsoft.Health.Fhir.Cds.Features.Health;
+using Microsoft.Health.Fhir.Cds.Features.Search;
+using Microsoft.Health.Fhir.Cds.Features.Storage;
 using Microsoft.Health.Fhir.Core.Registration;
-using Microsoft.Health.Fhir.CustomProvider.Configs;
-using Microsoft.Health.Fhir.CustomProvider.Features.Health;
-using Microsoft.Health.Fhir.CustomProvider.Features.Search;
-using Microsoft.Health.Fhir.CustomProvider.Features.Storage;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static class FhirServerBuilderCustomProviderRegistrationExtensions
+    public static class FhirServerBuilderCdsRegistrationExtensions
     {
-        public static IFhirServerBuilder AddExperimentalCustomProvider(this IFhirServerBuilder fhirServerBuilder, Action<CustomProviderDataStoreConfiguration> configureAction = null)
+        public static IFhirServerBuilder AddExperimentalCdsProvider(this IFhirServerBuilder fhirServerBuilder, Action<CdsDataStoreConfiguration> configureAction = null)
         {
             EnsureArg.IsNotNull(fhirServerBuilder, nameof(fhirServerBuilder));
             IServiceCollection services = fhirServerBuilder.Services;
 
             services.Add(provider =>
                 {
-                    var config = new CustomProviderDataStoreConfiguration();
-                    provider.GetService<IConfiguration>().GetSection("CustomProvider").Bind(config);
+                    var config = new CdsDataStoreConfiguration();
+                    provider.GetService<IConfiguration>().GetSection("Cds").Bind(config);
                     configureAction?.Invoke(config);
 
                     return config;
@@ -33,20 +33,20 @@ namespace Microsoft.Extensions.DependencyInjection
                 .Singleton()
                 .AsSelf();
 
-            services.Add<CustomProviderTokenProvider>()
+            services.Add<CdsTokenProvider>()
                 .Scoped()
                 .AsSelf();
 
-            services.Add<CustomProviderFhirDataStore>()
+            services.Add<CdsFhirDataStore>()
                 .Scoped()
                 .AsSelf()
                 .AsImplementedInterfaces();
 
             services
                 .AddHealthChecks()
-                .AddCheck<CustomProviderHealthCheck>(nameof(CustomProviderHealthCheck));
+                .AddCheck<CdsHealthCheck>(nameof(CdsHealthCheck));
 
-            services.Add<CustomProviderSearchService>()
+            services.Add<CdsSearchService>()
                 .Scoped()
                 .AsSelf()
                 .AsImplementedInterfaces();

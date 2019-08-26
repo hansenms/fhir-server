@@ -11,16 +11,16 @@ using EnsureThat;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 
-namespace Microsoft.Health.Fhir.CustomProvider.Features.Health
+namespace Microsoft.Health.Fhir.Cds.Features.Health
 {
     /// <summary>
     /// An <see cref="IHealthCheck"/> implementation that verifies connectivity to the SQL database
     /// </summary>
-    public class CustomProviderHealthCheck : IHealthCheck
+    public class CdsHealthCheck : IHealthCheck
     {
-        private readonly ILogger<CustomProviderHealthCheck> _logger;
+        private readonly ILogger<CdsHealthCheck> _logger;
 
-        public CustomProviderHealthCheck(ILogger<CustomProviderHealthCheck> logger)
+        public CdsHealthCheck(ILogger<CdsHealthCheck> logger)
         {
             EnsureArg.IsNotNull(logger, nameof(logger));
 
@@ -29,7 +29,7 @@ namespace Microsoft.Health.Fhir.CustomProvider.Features.Health
 
         public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken)
         {
-            return await Task.FromResult(HealthCheckResult.Healthy("Successfully connected to the CustomProvider data store."));
+            return await Task.FromResult(HealthCheckResult.Healthy("Successfully connected to the CDS data store."));
         }
     }
 }

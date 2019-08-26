@@ -10,37 +10,36 @@ using System.Threading;
 using System.Threading.Tasks;
 using EnsureThat;
 using Microsoft.Extensions.Logging;
-using Microsoft.Health.Fhir.Cds.Features;
+using Microsoft.Health.Fhir.Cds.Configs;
+using Microsoft.Health.Fhir.Cds.Features.Search.Expressions.Visitors.QueryGenerators;
+using Microsoft.Health.Fhir.Cds.Features.Storage;
 using Microsoft.Health.Fhir.Core.Features.Persistence;
 using Microsoft.Health.Fhir.Core.Features.Search;
 using Microsoft.Health.Fhir.Core.Models;
-using Microsoft.Health.Fhir.CustomProvider.Configs;
-using Microsoft.Health.Fhir.CustomProvider.Features.Search.Expressions.Visitors.QueryGenerators;
-using Microsoft.Health.Fhir.CustomProvider.Features.Storage;
 using Simple.OData.Client;
 
-namespace Microsoft.Health.Fhir.CustomProvider.Features.Search
+namespace Microsoft.Health.Fhir.Cds.Features.Search
 {
-    public class CustomProviderSearchService : SearchService
+    public class CdsSearchService : SearchService
     {
-        private readonly ILogger<CustomProviderSearchService> _logger;
+        private readonly ILogger<CdsSearchService> _logger;
 
-        private readonly CustomProviderDataStoreConfiguration _config;
+        private readonly CdsDataStoreConfiguration _config;
 
-        private readonly CustomProviderTokenProvider _tokenProvider;
+        private readonly CdsTokenProvider _tokenProvider;
 
         private readonly ODataClient _client;
 
         private readonly ICdsResourceFactory _cdsResourceFactory;
 
-        public CustomProviderSearchService(
+        public CdsSearchService(
             ISearchOptionsFactory searchOptionsFactory,
             IFhirDataStore fhirDataStore,
             IModelInfoProvider modelInfoProvider,
             ICdsResourceFactory cdsResourceFactory,
-            CustomProviderDataStoreConfiguration config,
-            CustomProviderTokenProvider tokenProvider,
-            ILogger<CustomProviderSearchService> logger)
+            CdsDataStoreConfiguration config,
+            CdsTokenProvider tokenProvider,
+            ILogger<CdsSearchService> logger)
             : base(searchOptionsFactory, fhirDataStore, modelInfoProvider)
         {
             EnsureArg.IsNotNull(cdsResourceFactory, nameof(cdsResourceFactory));

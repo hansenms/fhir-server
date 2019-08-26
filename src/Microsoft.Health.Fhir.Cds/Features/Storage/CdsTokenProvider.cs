@@ -8,21 +8,21 @@ using System.Threading;
 using System.Threading.Tasks;
 using EnsureThat;
 using Microsoft.Extensions.Logging;
-using Microsoft.Health.Fhir.CustomProvider.Configs;
+using Microsoft.Health.Fhir.Cds.Configs;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
-namespace Microsoft.Health.Fhir.CustomProvider.Features.Storage
+namespace Microsoft.Health.Fhir.Cds.Features.Storage
 {
-    public class CustomProviderTokenProvider
+    public class CdsTokenProvider
     {
-        private readonly ILogger<CustomProviderTokenProvider> _logger;
-        private readonly CustomProviderDataStoreConfiguration _config;
+        private readonly ILogger<CdsTokenProvider> _logger;
+        private readonly CdsDataStoreConfiguration _config;
         private readonly AuthenticationContext _authContext;
         private readonly ClientCredential _clientCreds;
 
-        public CustomProviderTokenProvider(
-            CustomProviderDataStoreConfiguration config,
-            ILogger<CustomProviderTokenProvider> logger)
+        public CdsTokenProvider(
+            CdsDataStoreConfiguration config,
+            ILogger<CdsTokenProvider> logger)
         {
             EnsureArg.IsNotNull(config, nameof(config));
             EnsureArg.IsNotNull(logger, nameof(logger));

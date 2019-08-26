@@ -3,15 +3,20 @@
 // Licensed under the MIT License (MIT). See LICENSE in the repo root for license information.
 // -------------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using Microsoft.Health.Fhir.Core.Features.Persistence;
+using System;
 
-namespace Microsoft.Health.Fhir.Cds.Features
+namespace Microsoft.Health.Fhir.Cds.Configs
 {
-    public interface ICdsResourceFactory
+    public class CdsDataStoreConfiguration
     {
-        RawResource CreateRawResource(string resourceType, IDictionary<string, object> odata);
+        public Uri Url { get; set; }
 
-        string GetResourceId(string resourceType, IDictionary<string, object> odata);
+        public Uri Authority { get; set; }
+
+        public string Audience { get; set; }
+
+        public string ClientId { get; set; }
+
+        public string ClientSecret { get; set; }
     }
 }

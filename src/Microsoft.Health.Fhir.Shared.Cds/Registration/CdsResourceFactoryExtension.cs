@@ -7,14 +7,14 @@ using System;
 using EnsureThat;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Health.Extensions.DependencyInjection;
-using Microsoft.Health.Fhir.Cds.Features;
+using Microsoft.Health.Fhir.Cds.Features.Storage;
 using Microsoft.Health.Fhir.Core.Registration;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
     public static class CdsResourceFactoryExtension
     {
-        public static IFhirServerBuilder AddExperimentalCds(this IFhirServerBuilder fhirServerBuilder)
+        public static IFhirServerBuilder AddExperimentalCdsFactory(this IFhirServerBuilder fhirServerBuilder)
         {
             EnsureArg.IsNotNull(fhirServerBuilder, nameof(fhirServerBuilder));
             IServiceCollection services = fhirServerBuilder.Services;

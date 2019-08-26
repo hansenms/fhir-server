@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Health.Fhir.Core.Features.Persistence;
 using Microsoft.Health.Fhir.Core.Models;
 
-namespace Microsoft.Health.Fhir.Cds.Features
+namespace Microsoft.Health.Fhir.Cds.Features.Storage
 {
     public class CdsResourceFactory : ICdsResourceFactory
     {
