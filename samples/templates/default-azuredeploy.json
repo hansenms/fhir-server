@@ -310,7 +310,8 @@
                 "enabledForDeployment": false
             },
             "dependsOn": [
-                "[concat('Microsoft.Web/sites/', variables('serviceName'))]"
+                "[concat('Microsoft.Web/sites/', variables('serviceName'))]",
+                "[variables('identityResourceId')]"
             ]
         },
         {
